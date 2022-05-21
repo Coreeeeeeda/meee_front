@@ -11,3 +11,13 @@ ENV HOME=/${WORKDIR} \
 
 WORKDIR ${HOME}
 
+# コンテナにパッケージをインストール
+COPY package*.json ./
+RUN yarn install
+
+# コンテナにNuxtプロジェクトをコピー
+COPY . ./
+
+# 本番環境用にアプリを構築
+RUN yarn run build
+
